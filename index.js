@@ -6,16 +6,16 @@ import dotenv from 'dotenv';
 import dayjs from 'dayjs';
 import joi from 'joi';
 
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 app.listen(5000, () => {
 	console.log(chalk.bold.green('Server is running on port 5000'));
 });
 
 let database = null;
-const mongocliente = new MongoClient('mongodb://127.0.0.1:27017/');
+const mongocliente = new MongoClient(process.env.SERVER_URL);
 mongocliente
 	.connect()
 	.then(() => {
